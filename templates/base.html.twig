@@ -32,88 +32,9 @@
     }
 
 body{
-
   background-color: #eee;
-
 }
 
-.navbar-nav>li>a{
-
-  text-transform: uppercase;
-  font-size: 12px;
-  margin-right:20px;
-  color: #fff;
-}
-
-
-.navbar-toggler {
-    padding: .20rem .50rem;
-    font-size: 1.25rem;
-    line-height: 1;
-    background-color: transparent;
-    border: 1px solid white;
-
-    }
-
-    .nav-link{
-
-      color: #fff !important;
-        font-size:14px !important;
-    }
-
-
-.wrapper{
-      width: 100%;
-    position: absolute;
-    height: 100%;
-    background-color: #827e79;
-    clip-path: polygon(91% 0, 100% 0, 100% 40%, 100% 100%, 71% 100%);
-    transition: 1s all;
-}
-
-.navbar-brand{
-
-  color:#fff;
-  font-family: 'Allerta Stencil', sans-serif;
-  margin-bottom: 4px;
-  font-size: 32px;
-}
-
-.navbar-red:hover .wrapper{
-
-  clip-path: polygon(81% 0, 100% 0, 100% 50%, 100% 100%, 65% 100%);
-
-}
-
-.navbar-brand:hover{
-
-  color:#fff;
-  
-}
-
-.navbar-red{
-
-  background-color: #f0951f;
-  color: #fff;
-
-}
-
-.nav-link:hover {
-  color: #827e79 !important;
-}
-.all-show{
-
-  z-index: 10;
-}
-a{
-    text-decoration:none !important;
-}
-span a{
-    color:#f0951f;
-}
-span a:hover{
-    color:#fff;
-}
 .btn-primary{
   background-color:var(--primarycolor);
   border:var(--secondarycolor);
@@ -124,7 +45,12 @@ span a:hover{
 }
 .form-control:focus{
   border-color:var(--primarycolor);
-
+}
+.nav-pills .nav-link:not(.active):hover,.dropdown-item{
+  color:var(--primarycolor)
+}
+.nav-pills .nav-link{
+  color:white;
 }
 /** MODIF CANVA **/
 #labelChart1,#labelChart2,#labelChart3{
@@ -150,14 +76,14 @@ span a:hover{
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+            <div class="d-flex flex-column align-items-center align-items-sm-start  text-white min-vh-100">
+                <a href="/acceuil" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">MaisonSûr </span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
-                        <a href="{{Link_Action_Menu_1}}" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">{{Action_Menu_1}}</span>
+                        <a href="/stats/show" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Stats</span>
                         </a>
                     </li>
                     <li>
@@ -212,19 +138,17 @@ span a:hover{
                     </li>
                 </ul>
                 <hr>
-                <div class="dropdown pb-4">
+                <div class="dropdown pb-4 fixed-bottom">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                        <span class="d-none d-sm-inline mx-1">loser</span>
+                        <span class="d-none d-sm-inline mx-1">{{app.user}}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                      
+                      {% for  i in 0..app.user.getRoles %}
+                      <li><a class="dropdown-item">{{app.user.getRoles[i]}}</a></li>
+                      {% endfor %}
+                        <li><a class="dropdown-item" href="/logout">Se déconnecter</a></li>
                     </ul>
                 </div>
             </div>

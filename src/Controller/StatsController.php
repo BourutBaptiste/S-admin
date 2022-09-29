@@ -36,18 +36,7 @@ class StatsController extends AbstractController
             'NbrAgence' => $statsRepository->GetNbrAgence()[0][1],
             'AllStats'=>$statsRepository->GetAllStats(),
             'AllNameAgence'=>$agenceRepository->GetAllName(),
-            'Action_Menu_1' =>"Statistiques",
-            'Action_Menu_2' =>"Accueil",
-            'Action_Menu_3' =>"1",
-            'Action_Menu_4' =>"1",
-            'Action_Menu_5' =>"1",
-            'Action_Menu_6' =>"1",
-            'Link_Action_Menu_1' =>"/stats/show",
-            'Link_Action_Menu_2' =>"/accueil",
-            'Link_Action_Menu_3' =>"1",
-            'Link_Action_Menu_4' =>"1",
-            'Link_Action_Menu_5' =>"1",
-            'Link_Action_Menu_6' =>"1",
+        
             //'UneStat'=>$UneStat,
           
 

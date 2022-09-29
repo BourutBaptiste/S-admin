@@ -3,6 +3,7 @@
 {% block title %}MaisonSûr | Log in{% endblock %}
 
 {% block content %}
+  <div class="container py-5 h-100">
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -20,7 +21,7 @@
 
 
 <section class="h-100 " >
-  <div class="container py-5 h-100">
+
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-10">
         <div class="card rounded-3 text-black">
