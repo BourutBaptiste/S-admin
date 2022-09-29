@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
+:root {
+    --primarycolor:#f0951f;
+    --secondarycolor:#827e79 ;
+
+    }
+
+body{
+
+  background-color: #eee;
+
+}
+
+.navbar-nav>li>a{
+
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-right:20px;
+  color: #fff;
+}
+
+
+.navbar-toggler {
+    padding: .20rem .50rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid white;
+
+    }
+
+    .nav-link{
+
+      color: #fff !important;
+        font-size:14px !important;
+    }
+
+
+.wrapper{
+      width: 100%;
+    position: absolute;
+    height: 100%;
+    background-color: #827e79;
+    clip-path: polygon(91% 0, 100% 0, 100% 40%, 100% 100%, 71% 100%);
+    transition: 1s all;
+}
+
+.navbar-brand{
+
+  color:#fff;
+  font-family: 'Allerta Stencil', sans-serif;
+  margin-bottom: 4px;
+  font-size: 32px;
+}
+
+.navbar-red:hover .wrapper{
+
+  clip-path: polygon(81% 0, 100% 0, 100% 50%, 100% 100%, 65% 100%);
+
+}
+
+.navbar-brand:hover{
+
+  color:#fff;
+  
+}
+
+.navbar-red{
+
+  background-color: #f0951f;
+  color: #fff;
+
+}
+
+.nav-link:hover {
+  color: #827e79 !important;
+}
+.all-show{
+
+  z-index: 10;
+}
+a{
+    text-decoration:none !important;
+}
+span a{
+    color:#f0951f;
+}
+span a:hover{
+    color:#fff;
+}
+.btn-primary{
+  background-color:var(--primarycolor);
+  border:var(--secondarycolor);
+}
+.btn-primary:hover{
+  background-color:var(--secondarycolor) !important;
+  border-color:var(--primarycolor) !important;
+}
+.form-control:focus{
+  border-color:var(--primarycolor);
+}

@@ -1,0 +1,252 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MaisonSûr | Stats {% endblock %}
+{% block content %}
+
+{#
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ChiffreAffaire</th>
+                <th>MatierePremiere</th>
+                <th>Benefice</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stat in stats %}
+            <tr>
+                <td>{{ stat.id }}</td>
+                <td>{{ stat.ChiffreAffaire }}</td>
+                <td>{{ stat.MatierePremiere }}</td>
+                <td>{{ stat.Benefice }}</td>
+                <td>
+                    <a href="{{ path('app_stats_show', {'id': stat.id}) }}">show</a>
+                    <a href="{{ path('app_stats_edit', {'id': stat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stats_new') }}">Create NON</a>#}
+    {% block stats %}
+
+
+
+
+
+{# MODIF STATS #}
+   <div class="container">
+   
+<div class="card">
+
+<div class="card-body">
+
+<div class='my-auto row'>
+<div class="col-md-4">
+<canvas id="labelChart1" style="margin-left:100px;height:150px !important;width:150px"></canvas>
+</div>
+<div class="col-md-4">
+<canvas id="labelChart2" style="margin-left:85px;height:150px !important;width:150px"></canvas>
+</div>
+<div class="col-md-4">
+<canvas id="labelChart3" style="margin-left:75px;height:150px !important;width:150px"></canvas>
+</div>
+
+
+</div>
+<div class="card-footer">
+<div class="row">
+
+<div class="col-sm-4 col-6">
+
+<div class="description-block border-right">
+<span class="description-percentage text-success"><i class="fas fa-caret-up"></i></span>
+<h5 class="description-header">${{sommeCA }}</h5>
+<span class="description-text">Chiffre d'affaire</span>
+</div>
+
+</div>
+
+<div class="col-sm-4 col-6">
+
+<div class="description-block border-right">
+<span class="description-percentage text-warning"><i class="fas fa-caret-left"></i></span>
+<h5 class="description-header">${{sommeCoutTotal }}</h5>
+<span class="description-text">Coût matière première</span>
+</div>
+
+</div>
+
+<div class="col-sm-4 col-6">
+
+<div class="description-block border-right">
+<span class="description-percentage text-success"><i class="fas fa-caret-up"></i></span>
+<h5 class="description-header">$ {{sommeBenef }}</h5>
+<span class="description-text">BENEF</span>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+{#PARTI STAT PAR AGENCE#}
+
+
+{% for  i in 0..NbrAgence-1 %}
+<div class="container">
+<div class="row">
+<h2 id="{{i + 1 }}"> Stat de la societe {{ AllNameAgence[i]['Nom']}}</h2>
+        <div class="col-sm-4 col-6">
+        <div class="card">
+        <div class="description-block border-right">
+        <span class="description-percentage text-success"><i class="fas fa-caret-up"></i></span>
+        <h5 id="{{i + 1}}-1"class="description-header">${{ AllStats[i][1] }}</h5>
+        <span class="description-text">CA</span>
+        </div>
+        </div>
+        </div>
+
+        <div class="col-sm-4 col-6">
+        <div class="card">
+        <div class="description-block border-right">
+        <span class="description-percentage text-success"><i class="fas fa-caret-up"></i></span>
+        <h5 id="{{i + 1}}-2" class="description-header">$ {{ AllStats[i][2] }}</h5>
+        <span class="description-text">Cout matiere premiere</span>
+        </div>
+        </div>
+        </div>
+
+        <div class="col-sm-4 col-6">
+        <div class="card">
+        <div class="description-block border-right">
+        <span class="description-percentage text-success"><i class="fas fa-caret-up"></i></span>
+        <h5 id="{{i + 1}}-3" class="description-header">$ {{ AllStats[i][3] }}</h5>
+        <span class="description-text">BENEF</span>
+        </div>
+        </div>
+        </div>
+
+{% endfor %}
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+{% endblock %}
+
+
+
+
+<script>
+console.log('test')
+var NbrAgence={{NbrAgence}};
+for (var j=1; j < 4;j++){
+
+
+var chart="labelChart"+j+"";
+    var CS =[] ;
+    var NAME =[] ;
+    //NAME[1]= document.getElementById(1).textContent;
+    //NAME[1]=NAME[1].replace('Stat de la societe',"");
+    //NAME[2]= document.getElementById(2).textContent;
+    //NAME[2]=NAME[2].replace('Stat de la societe',"");
+var ctxP = document.getElementById(chart).getContext('2d');
+  for (var i=1; i < NbrAgence+1;i++){
+    console.log("nbr:"+i);
+    var CSlable=i+"-"+j;
+    console.log(CSlable)
+    CS[i] = "test";
+    NAME[i]= document.getElementById(i).textContent;
+    NAME[i]=NAME[i].replace('Stat de la societe',"");
+
+    CS[i]= document.getElementById(CSlable).textContent;
+
+    CS[i]=CS[i].replace('$',"");
+
+
+  
+
+}
+console.log(NAME);
+console.log(CS);
+test(NbrAgence,NAME);
+var myPieChart = new Chart(ctxP, {
+  plugins: [ChartDataLabels],
+  type: 'pie',
+  data: {
+    labels: [NAME[1],NAME[2],NAME[3]],
+    datasets: [{
+      data: [ CS[1],CS[2],CS[3]],
+      backgroundColor: ["#F7464A", "#46BFBD"],
+      hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+    }]
+  },
+  options: {
+    responsive: true,
+    legend: {
+      position: 'right',
+      labels: {
+        padding: 20,
+        boxWidth: 10,
+        fontSize:15
+      }
+    },
+    plugins: {
+      datalabels: {
+        formatter: (value, ctx) => {
+          let sum = 0;
+          let dataArr = ctx.chart.data.datasets[0].data;
+          dataArr.map(data => {
+            sum += data;
+          });
+          let percentage = (value * 100 / sum).toFixed(2) + "%";
+          return percentage;
+        },
+        color: 'purple',
+        labels: {
+            fontSize:20
+        }
+      }
+    }
+  }
+ });
+}
+
+function test(nbr,tableau){
+    console.log("coucou");
+    console.log(nbr);
+    console.log(tableau);   
+    
+
+  for (i=1;i < nbr+1;i++){
+    console.log(tableau[i]);
+
+
+    }
+
+}
+</script>
+{% endblock %}
+
