@@ -53,7 +53,7 @@ body{
   color:white;
 }
 
-.container{
+.container,#menu{
   padding-top: 70px;
 }
 /** MODIF CANVA **/
@@ -66,16 +66,6 @@ body{
         {% endblock %}
 
     </head>
-
-
-
-
-
-
-
-
-
-
     <body>
   {% block header %}
 
@@ -153,30 +143,21 @@ body{
       
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                   {% if app.user %}
-                    {% for role in app.user.roles %}
-                      {% if (role == 'ROLE_ADV' or role == 'ROLE_ADMIN')  %}
-                        <li class="nav-item">
-                          <a href="" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">DOSSIER</span>
-                          </a>
-                        </li>
-                      {% endif %}
-
-                      {% if (role == 'ROLE_ATC' or role == 'ROLE_ADMIN')  %} 
-                        <li>
+                    {% if Menu_Name =="Stats"%}
+                          <li>
                           <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">RENDEZ VOUS</span> </a>
+                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">{{Name_Action_1}}</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                            {% for  i in 0..NbrAgence-1 %}
                               <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">DIP</span> 1 </a>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">{{ AllNameAgence[i]['Nom']}}</span>  </a>
                               </li>
-                              <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">BDC</span> 2 </a>
-                              </li>
+                            {% endfor %}
+
                             </ul>
-                        </li>        
-                      {% endif %}     
-                      {% if (role == 'ROLE_ADV' or role == 'ROLE_ADMIN')  %}
+                        </li> 
+                    {% elseif Menu_Name =="DRH" %}
+                    {% endif %}
                         <li>
                           <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Historique</span> </a>
@@ -195,8 +176,7 @@ body{
                                 </li>
                               </ul>
                           </li> 
-                      {% endif %}
-                    {% endfor %}
+
                   {% endif %}
                 
                 <div class="dropdown pb-4 fixed-bottom">
@@ -225,5 +205,4 @@ body{
 {% block content %}
 modif
 {% endblock %}
-
 

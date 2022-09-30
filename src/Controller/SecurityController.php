@@ -34,6 +34,16 @@ class SecurityController extends AbstractController
     #[Route(path: '/accueil', name: 'main')]
     public function acceuil(): Response
     {
-        return $this->render('base.html.twig');    
+        return $this->render('base.html.twig',[
+            'Link_Action_1'=>"",
+            'Name_Action_1'=>"",
+            'Link_Action_2'=>"",
+            'Name_Action_2'=>"",
+            'Link_Action_3'=>"",
+            'Name_Action_3'=>"",
+            'Link_Action_4'=>"",
+            'Name_Action_4'=>"",
+            "Menu_Name"=>"",
+        ]);    
     }
 }
