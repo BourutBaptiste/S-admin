@@ -4,8 +4,14 @@
 
 {% block content %}
     <h1>Register</h1>
-
+{% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
     {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.NomA, {
+            label: 'Nom'
+        }) }}
+                {{ form_row(registrationForm.PrenomA, {
+            label: 'Prenom'
+        }) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'

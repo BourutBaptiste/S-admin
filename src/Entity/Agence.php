@@ -30,9 +30,13 @@ class Agence
     #[ORM\OneToMany(mappedBy: 'AgenceId', targetEntity: Stats::class)]
     private Collection $Stats;
 
+    #[ORM\ManyToMany(targetEntity: Admin::class, mappedBy: 'Agences')]
+    private Collection $Employes;
+
     public function __construct()
     {
         $this->Stats = new ArrayCollection();
+        $this->Employes = new ArrayCollection();
     }
 
 
@@ -115,6 +119,33 @@ class Agence
             if ($stat->getAgenceId() === $this) {
                 $stat->setAgenceId(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Admin>
+     */
+    public function getEmployes(): Collection
+    {
+        return $this->Employes;
+    }
+
+    public function addEmploye(Admin $employe): self
+    {
+        if (!$this->Employes->contains($employe)) {
+            $this->Employes->add($employe);
+            $employe->addAgence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmploye(Admin $employe): self
+    {
+        if ($this->Employes->removeElement($employe)) {
+            $employe->removeAgence($this);
         }
 
         return $this;

@@ -3,33 +3,38 @@
 
 {% block title %}Stats{% endblock %}
 
-{% block body %}
-    <h1>Stats</h1>
+{% block content %}
 
-    <table class="table">
+<h1>Stat de l'agence de {{ stat.getAgenceId().getVille()}}</h1>
+<br>
+    <table class="table text-center">
+      <thead class="thead-dark">
+    <tr>
+
+      <th scope="col">ChiffreAffaire</th>
+      <th scope="col">MatierePremiere</th>
+      <th scope="col">Benefice</th>
+    </tr>
+  </thead>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ stat.id }}</td>
-            </tr>
-            <tr>
-                <th>ChiffreAffaire</th>
-                <td>{{ stat.ChiffreAffaire }}</td>
-            </tr>
-            <tr>
-                <th>MatierePremiere</th>
-                <td>{{ stat.MatierePremiere }}</td>
-            </tr>
-            <tr>
-                <th>Benefice</th>
-                <td>{{ stat.Benefice }}</td>
+              
+
+          
+              
+                <td class="text-warning">{{ AllStats[stat.id - 1][1]  }}€</td>
+           
+               
+                <td class="text-danger">{{ AllStats[stat.id - 1][2]  }}€</td>
+           
+                <td class="text-success">{{ AllStats[stat.id - 1][3]  }}€</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_stats_index') }}">back to list</a>
+   {# <a href="{{ path('app_stats_index') }}">back to list</a>
 
     <a href="{{ path('app_stats_edit', {'id': stat.id}) }}">edit</a>
 
-    {{ include('stats/_delete_form.html.twig') }}
+    {{ include('stats/_delete_form.html.twig') }}#}
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Stats;
 use App\Form\StatsType;
 use App\Repository\AgenceRepository;
 use App\Repository\StatsRepository;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,10 +68,19 @@ class StatsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_stats_show', methods: ['GET'])]
-    public function show(Stats $stat): Response
+    public function show(Stats $stat, StatsRepository $statsRepository,AgenceRepository $agenceRepository): Response
     {
+        
         return $this->render('stats/show.html.twig', [
             'stat' => $stat,
+            'Menu_Name'=>"Stats",
+            'Sous_Link_Action_1'=>"",
+            'Sous_Name_Action_1'=>"",
+            'Name_Action_1'=>"Stats par agence",
+            'NbrAgence' => $statsRepository->GetNbrAgence()[0][1],
+           'AllNameAgence'=>$agenceRepository->GetAllName(),
+           'AllStats'=>$statsRepository->GetAllStats(),
+
         ]);
     }
 
