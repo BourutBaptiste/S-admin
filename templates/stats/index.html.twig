@@ -42,7 +42,6 @@
 
 
 {# MODIF STATS #}
-   <div class="container">
    
 <div class="card">
 
@@ -77,7 +76,7 @@
 <div class="col-sm-4 col-6">
 
 <div class="description-block border-right">
-<span class="description-percentage text-warning"><i class="fas fa-caret-left"></i></span>
+<span class="description-percentage text-danger"><i class="fas fa-caret-down"></i></span>
 <h5 class="description-header">${{sommeCoutTotal }}</h5>
 <span class="description-text">Coût matière première</span>
 </div>
@@ -168,10 +167,7 @@ for (var j=1; j < 4;j++){
 var chart="labelChart"+j+"";
     var CS =[] ;
     var NAME =[] ;
-    //NAME[1]= document.getElementById(1).textContent;
-    //NAME[1]=NAME[1].replace('Stat de la societe',"");
-    //NAME[2]= document.getElementById(2).textContent;
-    //NAME[2]=NAME[2].replace('Stat de la societe',"");
+
 var ctxP = document.getElementById(chart).getContext('2d');
   for (var i=1; i < NbrAgence+1;i++){
     console.log("nbr:"+i);
@@ -192,6 +188,8 @@ var ctxP = document.getElementById(chart).getContext('2d');
 console.log(NAME);
 console.log(CS);
 test(NbrAgence,NAME);
+;
+
 var myPieChart = new Chart(ctxP, {
   plugins: [ChartDataLabels],
   type: 'pie',
@@ -200,37 +198,9 @@ var myPieChart = new Chart(ctxP, {
     datasets: [{
       data: [ CS[1],CS[2],CS[3]],
       backgroundColor: ["#F7464A", "#46BFBD"],
-      hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+      hoverBackgroundColor: ["#FF5A5E", "#5AD3D1"]
     }]
   },
-  options: {
-    responsive: true,
-    legend: {
-      position: 'right',
-      labels: {
-        padding: 20,
-        boxWidth: 10,
-        fontSize:15
-      }
-    },
-    plugins: {
-      datalabels: {
-        formatter: (value, ctx) => {
-          let sum = 0;
-          let dataArr = ctx.chart.data.datasets[0].data;
-          dataArr.map(data => {
-            sum += data;
-          });
-          let percentage = (value * 100 / sum).toFixed(2) + "%";
-          return percentage;
-        },
-        color: 'purple',
-        labels: {
-            fontSize:20
-        }
-      }
-    }
-  }
  });
 }
 
